@@ -1,0 +1,87 @@
+AllCops:
+  TargetRubyVersion: 2.7.2
+  NewCops: enable
+  Exclude:
+    - db/schema.rb
+    - Gemfile
+    - Gemfile.lock
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
+    - config/**/*  
+    - test/**/*
+    - bin/*
+    - '**/*.erb'
+
+# Metrics
+
+Metrics/AbcSize:
+  Max: 50
+  Exclude:
+    - db/migrate/*
+
+Metrics/BlockLength:
+  Max: 150
+
+Layout/LineLength:
+  Max: 150
+
+Metrics/MethodLength:
+  Max: 30
+  Exclude:
+    - db/migrate/*
+
+Metrics/ModuleLength:
+  Max: 150
+
+# Bundler
+
+Bundler/OrderedGems:
+  Enabled: false
+
+# Documentation
+
+Style/Documentation:
+  Enabled: false
+
+# Style
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/HashSyntax:
+  EnforcedStyle: ruby19_no_mixed_keys
+
+Style/SafeNavigation:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: true
+
+# Layout
+
+Layout/AccessModifierIndentation:
+  Enabled: false
+
+Layout/ClosingParenthesisIndentation:
+  Enabled: false
+
+Layout/CommentIndentation:
+  Enabled: false
+
+Layout/FirstArgumentIndentation:
+  Enabled: false
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstHashElementIndentation:
+  Enabled: false
+
+Layout/IndentationWidth:
+  Enabled: false
+
+Layout/MultilineHashBraceLayout:
+  EnforcedStyle: symmetrical
+
+Layout/IndentationStyle:
+  Enabled: false
