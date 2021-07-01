@@ -5,7 +5,7 @@ class MoviesController < ApiController
     @movie = Movie.new(movie_params)
     #render json: @movie.errors unless @movie.save #render errors
     
-    render_errors @movie.errors unless @movie.save
+    render_resource_errors @movie.errors unless @movie.save
     #byebug
   end
 
