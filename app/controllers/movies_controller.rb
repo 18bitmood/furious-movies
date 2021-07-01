@@ -1,9 +1,12 @@
-class MoviesController < ApplicationController
+class MoviesController < ApiController
   before_action :find_movie, only: %i[show update destroy]
   
   def create
     @movie = Movie.new(movie_params)
-    render json: @movie.errors unless @movie.save #render errors
+    #render json: @movie.errors unless @movie.save #render errors
+    
+    render_errors @movie.errors unless @movie.save
+    #byebug
   end
 
   def show
