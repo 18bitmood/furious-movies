@@ -8,9 +8,13 @@ class MoviesController < ApiController
 
   def show; end
 
-  def update; end
+  def update
+    render_resource_errors @movie.errors unless @movie.update(movie_params)
+  end
 
-  def destroy; end
+  def destroy
+    render_resource_errors @movie.errors unless @movie.destroy
+  end
 
   def index; end
 
