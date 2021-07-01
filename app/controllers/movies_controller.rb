@@ -6,6 +6,7 @@ class MoviesController < ApiController
     render_resource_errors @movie.errors unless @movie.save
   end
 
+# partial for view, and add prices, ratings and times
   def show; end
 
   def update
@@ -16,14 +17,22 @@ class MoviesController < ApiController
     render_resource_errors @movie.errors unless @movie.destroy
   end
 
-  def index; end
+  def index
+    @movies = Movie.all.paginate(page: params[:page])
+  end
 
-  def movie_details; end
+  def movie_description
+    # From API
+  end
 
   def fetch_movies_from_api
     # Interactor or Job
     # No add if movie exist
     # Add links into contstant file
+  end
+
+  def add_rating
+    # need another model which will collect ratings
   end
 
   private

@@ -4,4 +4,6 @@ class Movie < ApplicationRecord
 
   validates_length_of :name, maximum: 255
   validates_length_of :imdb_id, maximum: 64
+
+  self.per_page = 10
 end
