@@ -1,10 +1,13 @@
 class MoviesController < ApplicationController
+  #before_action find movie only show update destroy
+  
   def create
     @movie = Movie.new(movie_params)
-    render json: @movie.errors unless @movie.save
+    render json: @movie.errors unless @movie.save #render errors
   end
 
-  def read
+  def show
+    @movie = Movie.find(params[:id])
   end
 
   def update
@@ -14,6 +17,9 @@ class MoviesController < ApplicationController
   end
 
   def index
+  end
+
+  def details
   end
 
   private 
