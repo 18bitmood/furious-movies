@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  get 'movies/create'
-  get 'movies/update'
-  get 'movies/destroy'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  post 'movies/create' #=> '#movies' #post 'movies'
+  get 'movies/read'
+  #resoures only
 end
