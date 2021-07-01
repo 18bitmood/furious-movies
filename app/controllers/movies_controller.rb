@@ -1,11 +1,7 @@
 class MoviesController < ApplicationController
   def create
     @movie = Movie.new(movie_params)
-    if @movie.save
-      render json: @movie
-    else
-      render json: @movie.errors
-    end
+    render json: @movie.errors unless @movie.save
   end
 
   def read
@@ -15,6 +11,9 @@ class MoviesController < ApplicationController
   end
 
   def destroy
+  end
+
+  def index
   end
 
   private 
