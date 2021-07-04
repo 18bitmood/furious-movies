@@ -1,12 +1,12 @@
 class MoviesController < ApiController
-  before_action :find_movie, only: %i[show update destroy]
+  before_action :find_movie, only: %i[show update destroy movie_description]
 
   def create
     @movie = Movie.new(movie_params)
     render_resource_errors @movie.errors unless @movie.save
   end
 
-# partial for view, and add prices, ratings and times
+# ADD TIMES, PRICES AND RATINGS
   def show; end
 
   def update
@@ -19,15 +19,24 @@ class MoviesController < ApiController
 
   def index
     @movies = movies.paginate(page: params[:page])
-    #byebug
     @total_count = movies.count
   end
 
   def movie_description
     # From API
+    # To Constants
+    # To interactor
+    # Save apikey
+    #http://www.omdbapi.com/?apikey=e4f33820
+    url = "http://www.omdbapi.com/"
+    apikey = "e4f33820"
+    
   end
 
   def fetch_movies_from_api
+    # ADD TO SEEDS THE LIST
+    # CHECK INVALID IMDB_ID
+
     # Interactor or Job
     # No add if movie exist
     # Add links into contstant file
@@ -39,7 +48,7 @@ class MoviesController < ApiController
 
   private
 
-  def movie_params
+  def movie_params # CHECK UNPERMIT PARAMS
     params.permit(:name, :imdb_id)
   end
 
@@ -48,6 +57,6 @@ class MoviesController < ApiController
   end
 
   def movies
-    @movies ||= Movie.all #check nil
+    @movies ||= Movie.all
   end
 end
