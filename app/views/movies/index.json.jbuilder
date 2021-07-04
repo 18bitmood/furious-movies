@@ -1,1 +1,4 @@
-json.array! @movies, :id, :name, :imdb_id
+json.total @total_count
+json.movies @movies do |movie| 
+  json.partial! 'movie', movie: movie
+end

@@ -18,7 +18,9 @@ class MoviesController < ApiController
   end
 
   def index
-    @movies = Movie.all.paginate(page: params[:page])
+    @movies = movies.paginate(page: params[:page])
+    #byebug
+    @total_count = movies.count
   end
 
   def movie_description
@@ -43,5 +45,9 @@ class MoviesController < ApiController
 
   def find_movie
     @movie = Movie.find(params[:id])
+  end
+
+  def movies
+    @movies ||= Movie.all #check nil
   end
 end
