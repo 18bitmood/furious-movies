@@ -1,5 +1,6 @@
 class MoviesController < ApiController
-  before_action :find_movie, only: %i[show update destroy movie_description]
+  require 'rest-client'
+  before_action :find_movie, only: %i[show update destroy details]
 
   def create
     @movie = Movie.new(movie_params)
@@ -22,24 +23,18 @@ class MoviesController < ApiController
     @total_count = movies.count
   end
 
-  def movie_description
-    # From API
+  def details
+    # ADD TO SEEDS THE LIST
     # To Constants
     # To interactor
     # Save apikey
-    #http://www.omdbapi.com/?apikey=e4f33820
-    url = "http://www.omdbapi.com/"
-    apikey = "e4f33820"
-    
-  end
-
-  def fetch_movies_from_api
-    # ADD TO SEEDS THE LIST
-    # CHECK INVALID IMDB_ID
-
-    # Interactor or Job
-    # No add if movie exist
-    # Add links into contstant file
+    # http://www.omdbapi.com/?apikey=e4f33820
+    # url = "http://www.omdbapi.com/"
+    # apikey = "e4f33820"
+    imdb_id = @movie.imdb_id
+    # url = "http://www.omdbapi.com/?apikey=e4f33820&i=tt0232500"
+    url = "http://www.omdbapi.com/?apikey=e4f33820&i=#{imdb_id}"
+    @response = JSON.parse(RestClient.get(url))
   end
 
   def add_rating
@@ -48,7 +43,8 @@ class MoviesController < ApiController
 
   private
 
-  def movie_params # CHECK UNPERMIT PARAMS
+# CHECK UNPERMIT PARAMS
+  def movie_params
     params.permit(:name, :imdb_id)
   end
 
