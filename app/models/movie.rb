@@ -1,5 +1,6 @@
 class Movie < ApplicationRecord
   has_many :ratings, dependent: :destroy
+  has_many :showtimes, dependent: :destroy
 
   validates_presence_of :name, :imdb_id
   validates_uniqueness_of :name, :imdb_id
