@@ -2,15 +2,13 @@ class RatingsController < ApiController
   before_action :get_movie
   
   def create
-    #view
     @rating = @movie.ratings.build(rating_params)
-    return render_resource_errors @rating unless @rating.valid?
+    render_resource_errors @rating unless @rating.save
   end
 
   def index
     @ratings = @movie.ratings
     @total_count = @movie.ratings.count
-    #render json: @ratings #view
   end
 
   private 
@@ -20,7 +18,6 @@ class RatingsController < ApiController
   end
 
   def rating_params
-    params.permit :mark
+    params.permit :movie_id, :mark
   end
-
 end
