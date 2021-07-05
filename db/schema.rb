@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_01_050916) do
+ActiveRecord::Schema.define(version: 2021_07_05_055748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,4 +22,13 @@ ActiveRecord::Schema.define(version: 2021_07_01_050916) do
     t.string "imdb_id"
   end
 
+  create_table "ratings", force: :cascade do |t|
+    t.integer "mark"
+    t.bigint "movie_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_id"], name: "index_ratings_on_movie_id"
+  end
+
+  add_foreign_key "ratings", "movies"
 end
