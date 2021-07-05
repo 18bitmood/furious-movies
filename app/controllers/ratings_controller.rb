@@ -9,7 +9,8 @@ class RatingsController < ApiController
 
   def index
     @ratings = @movie.ratings
-    render json: @ratings #view
+    @total_count = @movie.ratings.count
+    #render json: @ratings #view
   end
 
   private 

@@ -8,6 +8,8 @@ class Rating < ApplicationRecord
     less_than_or_equal_to: 10
   }
 
+  self.per_page = 10
+
   def update_average_rating
     movie.average_rating = recount_average_rating
     movie.save
