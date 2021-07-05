@@ -6,7 +6,7 @@ class MoviesController < ApiController
     render_resource_errors @movie.errors unless @movie.save
   end
 
-# ADD TIMES, PRICES AND RATINGS
+# ADD TIMES, PRICES
   def show; end
 
   def update
@@ -24,10 +24,6 @@ class MoviesController < ApiController
   def details
     # ADD TO SEEDS THE LIST
     @response = FetchMovieDetails.run(movie: @movie).result
-  end
-
-  def add_rating
-    # need another model which will collect ratings
   end
 
   private

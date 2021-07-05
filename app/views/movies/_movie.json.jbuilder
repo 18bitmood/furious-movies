@@ -1,1 +1,1 @@
-json.extract! movie, :id, :name, :imdb_id
+json.extract! movie, :id, :name, :imdb_id, :average_rating
