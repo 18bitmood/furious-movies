@@ -1,6 +1,6 @@
 class UpdateRatingsParams < ActiveInteraction::Base
   object :movie
-  
+
   # count this params and save it to DB to avoid perfomance issue with many requests
   def execute
     movie.average_rating = recount_average_rating

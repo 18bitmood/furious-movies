@@ -1,14 +1,13 @@
 class ShowtimesController < ApiController
   before_action :set_movie
   before_action :find_showtime, only: %i[show update destroy]
-  
+
   def create
     @showtime = @movie.showtimes.build(showtime_params)
     render_resource_errors @showtime unless @showtime.save
   end
 
-  def show
-  end
+  def show; end
 
   def update
     render_resource_errors @showtime.errors unless @showtime.update(showtime_params)
@@ -19,9 +18,10 @@ class ShowtimesController < ApiController
   end
 
   def index
+    @showtimes = @movie.showtimes.paginate(page: params[:page])
   end
 
-  private 
+  private
 
   def set_movie
     @movie = Movie.find(params[:movie_id])

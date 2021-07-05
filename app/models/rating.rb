@@ -10,8 +10,8 @@ class Rating < ApplicationRecord
 
   self.per_page = 10
 
-  private 
-  
+  private
+
   def update_rating_parameters
     UpdateRatingsParams.run(movie: movie)
   end
