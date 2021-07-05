@@ -4,7 +4,7 @@ class RatingsController < ApiController
   def create
     #view
     @rating = @movie.ratings.build(rating_params)
-    render_resource_errors @rating unless @rating.save
+    return render_resource_errors @rating unless @rating.valid?
   end
 
   def index
@@ -21,4 +21,5 @@ class RatingsController < ApiController
   def rating_params
     params.permit :mark
   end
+
 end
