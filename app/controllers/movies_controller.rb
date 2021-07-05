@@ -19,7 +19,6 @@ class MoviesController < ApiController
 
   def index
     @movies = movies.paginate(page: params[:page])
-    @total_count = movies.count
   end
 
   def details

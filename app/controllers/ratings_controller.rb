@@ -7,8 +7,7 @@ class RatingsController < ApiController
   end
 
   def index
-    @ratings = @movie.ratings
-    @total_count = @movie.ratings.count
+    @ratings = @movie.ratings.paginate(page: params[:page])
   end
 
   private
