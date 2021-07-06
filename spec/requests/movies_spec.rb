@@ -82,4 +82,23 @@ RSpec.describe 'Movies', type: :request do
       end
     end
   end
+
+  describe 'POST /update_all_prices' do
+    let!(:movie) { create :movie, name: 'TEST', imdb_id: 'test', price: 111 }
+    let!(:movie2) { create :movie, name: 'TEST2', imdb_id: 'test2', price: 222 }
+    let!(:headers) { { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' } }
+    let!(:params) { { price: 320 } }
+
+    subject { post "update_all_prices", headers: headers, params: params }
+
+    context 'when success' do
+      it 'updates all movies prices' do
+        expect(response).to have_http_status(:success)
+        movie.reload
+        movie2.reload
+        expect(movie.price).to eq(params[:price])
+        expect(movie2.price).to eq(params[:price])
+      end
+    end
+  end
 end

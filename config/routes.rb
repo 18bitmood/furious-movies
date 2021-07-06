@@ -5,5 +5,5 @@ Rails.application.routes.draw do
     member { get 'details' }
   end
   get 'all_movies', to: 'movies#movies_with_details'
-  post 'movies/update_prices', to: 'movies#update_prices'
+  post 'update_all_prices', to: 'movies#update_prices'
 end
