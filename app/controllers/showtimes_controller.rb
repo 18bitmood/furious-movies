@@ -18,7 +18,8 @@ class ShowtimesController < ApiController
   end
 
   def index
-    @showtimes = @movie.showtimes.paginate(page: params[:page])
+    @showtimes = params[:including] == 'all' ? @movie.showtimes : @movie.showtimes.only_futures
+    @showtimes = @showtimes.paginate(page: params[:page])
   end
 
   private
@@ -32,6 +33,6 @@ class ShowtimesController < ApiController
   end
 
   def showtime_params
-    params.permit :movie_id, :showtime
+    params.permit :movie_id, :showtime, :including
   end
 end

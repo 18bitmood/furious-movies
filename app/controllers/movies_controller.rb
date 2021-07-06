@@ -6,7 +6,7 @@ class MoviesController < ApiController
     render_resource_errors @movie.errors unless @movie.save
   end
 
-# ADD TIMES, PRICES
+# ADD PRICES
   def show; end
 
   def update

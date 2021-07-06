@@ -6,6 +6,8 @@ class Showtime < ApplicationRecord
 
   self.per_page = 10
 
+  scope :only_futures, -> { where("showtime > '#{DateTime.now}'") }
+
   def human_read
     showtime&.strftime('%B %d, %Y, %T')
   end
