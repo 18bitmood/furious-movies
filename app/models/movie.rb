@@ -15,6 +15,6 @@ class Movie < ApplicationRecord
   def dollars_price
     return '$0.00' if price.nil?
 
-    "$#{'%.2f' % (price / 100.to_f).round(2)}"
+    "$#{'%.2f' % (price / 100.to_f).round(2)}" # rubocop:disable Style/FormatString
   end
 end

@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2021_07_06_095014) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "imdb_id"
-    t.decimal "average_rating", precision: 3, scale: 2, default: "0.0"
+    t.decimal "average_rating", precision: 4, scale: 2, default: "0.0"
     t.integer "ratings_total_number"
     t.integer "price"
   end
