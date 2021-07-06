@@ -4,5 +4,6 @@ Rails.application.routes.draw do
     resources :showtimes, only: %i[create show update destroy index]
     member { get 'details' }
   end
+  get 'all_movies', to: 'movies#movies_with_details'
   post 'movies/update_prices', to: 'movies#update_prices'
 end

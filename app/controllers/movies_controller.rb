@@ -25,8 +25,16 @@ class MoviesController < ApiController
   end
 
   def update_prices
-    movies.each do |movie| 
+    movies.each do |movie|
       return render_resource_errors movie.errors unless movie.update(prices_params)
+    end
+  end
+
+  def movies_with_details
+    @movies = movies
+    @result = @movies.map do |movie|
+      details = FetchMovieDetails.run(movie: movie).result
+      { movie: movie, details: details }
     end
   end
 
