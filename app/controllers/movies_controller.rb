@@ -26,6 +26,9 @@ class MoviesController < ApiController
     @response = FetchMovieDetails.run(movie: @movie).result
   end
 
+  def update_all_prices
+  end
+
   private
 
   def movie_params

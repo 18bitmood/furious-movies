@@ -8,5 +8,10 @@ class Movie < ApplicationRecord
   validates_length_of :name, maximum: 255
   validates_length_of :imdb_id, maximum: 64
 
+  validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+
   self.per_page = 10
+
+  #def self.dollars_price
+  #end
 end
