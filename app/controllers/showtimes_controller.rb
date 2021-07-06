@@ -33,6 +33,6 @@ class ShowtimesController < ApiController
   end
 
   def showtime_params
-    params.permit :movie_id, :showtime, :including
+    params.permit :movie_id, :showtime
   end
 end
