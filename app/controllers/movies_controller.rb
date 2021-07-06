@@ -6,7 +6,6 @@ class MoviesController < ApiController
     render_resource_errors @movie.errors unless @movie.save
   end
 
-# ADD PRICES
   def show; end
 
   def update
@@ -32,7 +31,7 @@ class MoviesController < ApiController
   private
 
   def movie_params
-    params.permit(:name, :imdb_id)
+    params.permit(:name, :imdb_id, :price)
   end
 
   def find_movie

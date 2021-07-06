@@ -12,6 +12,7 @@ class Movie < ApplicationRecord
 
   self.per_page = 10
 
-  #def self.dollars_price
-  #end
+  def dollars_price
+    "$#{(price/100.to_f).round(2)}"
+  end
 end
