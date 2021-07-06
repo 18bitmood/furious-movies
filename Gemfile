@@ -10,18 +10,18 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'active_interaction'
-# gem 'activeadmin'
+gem 'rest-client'
 gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
 gem 'rubocop-rspec', require: false
 gem 'will_paginate'
-gem 'rest-client'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'dox'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
+  gem 'dotenv-rails'
 end
 
 group :development do

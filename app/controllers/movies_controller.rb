@@ -49,7 +49,7 @@ class MoviesController < ApiController
   end
 
   def movies
-    @movies ||= Movie.all
+    @movies ||= Movie.all.sort_by(&:id)
   end
 
   def prices_params
