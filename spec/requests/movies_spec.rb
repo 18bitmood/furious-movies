@@ -67,4 +67,19 @@ RSpec.describe 'Movies', type: :request do
       end
     end
   end
+
+  describe 'GET /movies' do
+    let!(:movie) { create :movie, name: 'TEST', imdb_id: 'test' }
+    let!(:movie2) { create :movie, name: 'TEST2', imdb_id: 'test2' }
+    let!(:headers) { { 'ACCEPT' => 'application/json' } }
+
+    subject! { get "/movies", headers: headers }
+
+    context 'when success' do
+      it 'returns movies list' do
+        expect(response).to have_http_status(:success)
+        expect(JSON.parse(response.body)['total']).to eq 2
+      end
+    end
+  end
 end
