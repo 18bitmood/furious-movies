@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :movie do
     name { 'MyString' }
-    price { '9.99' }
+    price { '999' }
   end
 end
