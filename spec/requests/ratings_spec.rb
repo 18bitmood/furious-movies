@@ -1,24 +1,45 @@
 require 'rails_helper'
 
 RSpec.describe 'Ratings', type: :request do
-  describe 'GET /create' do
-    it 'returns http success' do
-      get '/ratings/create'
-      expect(response).to have_http_status(:success)
+  describe 'POST /movies/:id/ratings' do
+    let(:movie) { create :movie, name: 'TEST', imdb_id: 'test' }
+    let(:params) { { mark: 4 } }
+    let(:headers) { { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' } }
+
+    subject { post "/movies/#{movie.id}/ratings", params: params.to_json, headers: headers }
+
+    context 'with valid params' do
+      it 'creates rating' do
+        expect { subject }.to change { Rating.count }.by(1)
+        expect(response).to have_http_status(:success)
+        expect(movie.ratings.first.mark).to eq params[:mark]
+      end
+    end
+
+    context 'with invalid params' do
+      let!(:params) { { mark: 'a' } }
+
+      it "doesn't create rating" do
+        expect { subject }.to_not(change { Rating.count })
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(movie.ratings.blank?).to eq true
+      end
     end
   end
 
-  describe 'GET /destroy' do
-    it 'returns http success' do
-      get '/ratings/destroy'
-      expect(response).to have_http_status(:success)
-    end
-  end
+  describe 'GET /movies/:id/ratings' do
+    let(:movie) { create :movie, name: 'TEST', imdb_id: 'test' }
+    let!(:rating1) { create :rating, movie_id: movie.id, mark: rand(1..5) }
+    let!(:rating2) { create :rating, movie_id: movie.id, mark: rand(1..5) }
+    let!(:rating3) { create :rating, movie_id: movie.id, mark: rand(1..5) }
+    let(:headers) { { 'ACCEPT' => 'application/json' } }
 
-  describe 'GET /index' do
-    it 'returns http success' do
-      get '/ratings/index'
-      expect(response).to have_http_status(:success)
+    subject! { get "/movies/#{movie.id}/ratings", headers: headers }
+
+    context 'with existing ratings' do
+      it 'show movies ratings' do
+        expect(JSON.parse(response.body)['total']).to eq 3
+      end
     end
   end
 end
