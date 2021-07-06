@@ -23,19 +23,48 @@ RSpec.describe 'Movies', type: :request do
       end
     end
   end
+
+  describe 'GET /movies/:id' do
+    let!(:movie) { create :movie, name: 'TEST', imdb_id: 'test' }
+    let!(:headers) { { 'ACCEPT' => 'application/json' } }
+
+    subject! { get "/movies/#{movie.id}", headers: headers }
+
+    context 'with existing id' do
+      it 'returns movie details' do
+        expect(response).to have_http_status(:success)
+      end
+    end
+  end
+
+  describe 'PATCH /movies/:id' do
+    let!(:movie) { create :movie, name: 'TEST', imdb_id: 'test' }
+    let!(:headers) { { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' } }
+    let!(:params) { { name: 'another name', price: 450 } }
+
+    subject! { patch "/movies/#{movie.id}", headers: headers, params: params.to_json }
+
+    context 'with existing id and valid params' do
+      it 'updates existing movie params' do
+        expect(response).to have_http_status(:success)
+        movie.reload
+        expect(movie.name).to eq(params[:name])
+        expect(movie.price).to eq(params[:price])
+      end
+    end
+  end
+
+  describe 'DELETE /movies/:id' do
+    let!(:movie) { create :movie, name: 'TO DELETE', imdb_id: 'test' }
+    let!(:headers) { { 'ACCEPT' => 'application/json' } }
+
+    subject { delete "/movies/#{movie.id}", headers: headers }
+
+    context 'with existing id' do
+      it 'deletes existing movie' do
+        expect { subject }.to change { Movie.count }.by(-1)
+        expect(response).to have_http_status(:success)
+      end
+    end
+  end
 end
-
-  # describe 'GET /update' do
-  #   it 'returns http success' do
-  #     get '/movies/update'
-  #     expect(response).to have_http_status(:success)
-  #   end
-  # end
-
-  # describe 'GET /destroy' do
-  #   it 'returns http success' do
-  #     get '/movies/destroy'
-  #     expect(response).to have_http_status(:success)
-  #   end
-  # end
-# end
