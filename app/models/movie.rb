@@ -13,6 +13,8 @@ class Movie < ApplicationRecord
   self.per_page = 10
 
   def dollars_price
+    return "$0.00" if price.nil?
+    
     "$#{(price/100.to_f).round(2)}"
   end
 end

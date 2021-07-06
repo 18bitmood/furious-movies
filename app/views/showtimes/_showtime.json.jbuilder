@@ -1,2 +1,2 @@
 json.id showtime.id
-json.showtime showtime.human_read
+json.showtime showtime.showtime_formatted

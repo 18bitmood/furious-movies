@@ -8,7 +8,7 @@ class Showtime < ApplicationRecord
 
   scope :only_futures, -> { where("showtime > '#{DateTime.now}'") }
 
-  def human_read
+  def showtime_formatted
     showtime&.strftime('%B %d, %Y, %T')
   end
 end
