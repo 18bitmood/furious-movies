@@ -21,11 +21,13 @@ class MoviesController < ApiController
   end
 
   def details
-    # ADD TO SEEDS THE LIST
     @response = FetchMovieDetails.run(movie: @movie).result
   end
 
-  def update_all_prices
+  def update_prices
+    movies.each do |movie| 
+      return render_resource_errors movie.errors unless movie.update(prices_params)
+    end
   end
 
   private
@@ -40,5 +42,9 @@ class MoviesController < ApiController
 
   def movies
     @movies ||= Movie.all
+  end
+
+  def prices_params
+    params.permit(:price)
   end
 end
