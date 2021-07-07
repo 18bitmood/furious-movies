@@ -50,7 +50,7 @@
                     "summary": "creates movie",
                     "value": {
                       "success": true,
-                      "id": 242,
+                      "id": 274,
                       "name": "Movie",
                       "imdb_id": "imdb",
                       "price": 0,
@@ -99,7 +99,7 @@
                       "total": 2,
                       "movies": [
                         {
-                          "id": 246,
+                          "id": 278,
                           "name": "TEST",
                           "imdb_id": "test",
                           "price": 0,
@@ -112,7 +112,7 @@
                           ]
                         },
                         {
-                          "id": 247,
+                          "id": 279,
                           "name": "TEST2",
                           "imdb_id": "test2",
                           "price": 0,
@@ -153,7 +153,7 @@
             "schema": {
               "type": "number"
             },
-            "example": "243"
+            "example": "275"
           },
           {
             "name": "Accept",
@@ -170,7 +170,7 @@
                   "returns movie info": {
                     "summary": "returns movie info",
                     "value": {
-                      "id": 243,
+                      "id": 275,
                       "name": "TEST",
                       "imdb_id": "test",
                       "price": 0,
@@ -207,7 +207,7 @@
             "schema": {
               "type": "number"
             },
-            "example": "244"
+            "example": "276"
           },
           {
             "name": "Accept",
@@ -245,7 +245,7 @@
                     "summary": "updates existing movie params",
                     "value": {
                       "success": true,
-                      "id": 244,
+                      "id": 276,
                       "name": "another name",
                       "imdb_id": "test",
                       "price": 450,
@@ -282,7 +282,7 @@
             "schema": {
               "type": "number"
             },
-            "example": "245"
+            "example": "277"
           },
           {
             "name": "Accept",
@@ -390,7 +390,7 @@
             "schema": {
               "type": "number"
             },
-            "example": "250"
+            "example": "282"
           },
           {
             "name": "Accept",
@@ -407,7 +407,7 @@
                   "returns movie details with info from OMDB": {
                     "summary": "returns movie details with info from OMDB",
                     "value": {
-                      "id": 250,
+                      "id": 282,
                       "name": "The Fast and the Furious",
                       "imdb_id": "tt0232500",
                       "price": 0,
@@ -498,7 +498,7 @@
                       "total": 2,
                       "movies": [
                         {
-                          "id": 251,
+                          "id": 283,
                           "name": "The Fast and the Furious",
                           "imdb_id": "tt0232500",
                           "price": 0,
@@ -551,7 +551,7 @@
                           }
                         },
                         {
-                          "id": 252,
+                          "id": 284,
                           "name": "some name",
                           "imdb_id": "id",
                           "price": 0,
@@ -596,7 +596,7 @@
             "schema": {
               "type": "number"
             },
-            "example": "253"
+            "example": "285"
           },
           {
             "name": "Accept",
@@ -633,7 +633,7 @@
                     "summary": "creates rating",
                     "value": {
                       "success": true,
-                      "id": 25,
+                      "id": 33,
                       "mark": 4
                     }
                   }
@@ -661,7 +661,7 @@
             "schema": {
               "type": "number"
             },
-            "example": "255"
+            "example": "287"
           },
           {
             "name": "Accept",
@@ -681,16 +681,149 @@
                       "total": 3,
                       "ratings": [
                         {
-                          "id": 26,
-                          "mark": 1
+                          "id": 34,
+                          "mark": 3
                         },
                         {
-                          "id": 27,
+                          "id": 35,
                           "mark": 4
                         },
                         {
-                          "id": 28,
-                          "mark": 1
+                          "id": 36,
+                          "mark": 3
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/{movie_id}/showtimes": {
+      "post": {
+        "summary": "Create a showtime for existing movie",
+        "tags": [
+          "Showtimes"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "movie_id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "288"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "example": "application/json"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/json"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "creates showtime": {
+                  "summary": "creates showtime",
+                  "value": {
+                    "showtime": "2021-07-08T11:15:02.497+03:00"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "creates showtime": {
+                    "summary": "creates showtime",
+                    "value": {
+                      "success": true,
+                      "id": 52,
+                      "showtime": "July 08, 2021, 08:15:02"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Show all showtimes for movie",
+        "tags": [
+          "Showtimes"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "movie_id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "290"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "returns only future showtimes": {
+                    "summary": "returns only future showtimes",
+                    "value": {
+                      "total": 1,
+                      "showtimes": [
+                        {
+                          "id": 53,
+                          "showtime": "July 08, 2021, 08:15:02"
+                        }
+                      ]
+                    }
+                  },
+                  "returns all showtimes": {
+                    "summary": "returns all showtimes",
+                    "value": {
+                      "total": 2,
+                      "showtimes": [
+                        {
+                          "id": 55,
+                          "showtime": "July 08, 2021, 08:15:02"
+                        },
+                        {
+                          "id": 56,
+                          "showtime": "July 06, 2021, 08:15:02"
                         }
                       ]
                     }
@@ -716,6 +849,10 @@
     {
       "name": "Ratings",
       "description": ""
+    },
+    {
+      "name": "Showtimes",
+      "description": ""
     }
   ],
   "x-tagGroups": [
@@ -729,6 +866,12 @@
       "name": "Ratings",
       "tags": [
         "Ratings"
+      ]
+    },
+    {
+      "name": "Showtimes",
+      "tags": [
+        "Showtimes"
       ]
     }
   ]

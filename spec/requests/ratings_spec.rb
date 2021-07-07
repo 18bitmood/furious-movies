@@ -5,7 +5,7 @@ RSpec.describe 'Ratings', type: :request do
 
   describe 'POST /movies/:id/ratings' do
     include Docs::Api::V1::Ratings::Create
-    
+
     let(:movie) { create :movie, name: 'TEST', imdb_id: 'test' }
     let(:params) { { mark: 4 } }
     let(:headers) { { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' } }
