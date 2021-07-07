@@ -75,4 +75,4 @@ Patch movies/:id/showtimes/:id - updates existing showtime
 Delete movies/:id/showtimes/:id - deletes an existing showitme
 
 Get movies/:id/showtimes - show you the list of showtimes relates to the movie.
-### NOTE! SHOWS YOU ONLY FUTURE SHOWTIMES. TO SEE ALL SHOWTIMES FOR THE MOVIE, ADD 'including=all' PARAM TO YOUR REQUEST.
+NOTE! SHOWS YOU ONLY FUTURE SHOWTIMES. TO SEE ALL SHOWTIMES FOR THE MOVIE, ADD 'including=all' PARAM TO YOUR REQUEST.
