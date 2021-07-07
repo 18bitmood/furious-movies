@@ -1,14 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe 'Movies', type: :request do
+  include Docs::Api::V1::Movies::Api
+
   describe 'POST /movies' do
+    include Docs::Api::V1::Movies::Create
+
     let(:params) { { name: 'Movie', imdb_id: 'imdb' } }
     let(:headers) { { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' } }
 
     subject { post '/movies', params: params.to_json, headers: headers }
 
     context 'with valid params' do
-      it 'creates movie' do
+      it 'creates movie', :dox do
         expect { subject }.to change { Movie.count }.by(1)
         expect(response).to have_http_status(:success)
       end
@@ -25,19 +29,23 @@ RSpec.describe 'Movies', type: :request do
   end
 
   describe 'GET /movies/:id' do
+    include Docs::Api::V1::Movies::Show
+
     let!(:movie) { create :movie, name: 'TEST', imdb_id: 'test' }
     let!(:headers) { { 'ACCEPT' => 'application/json' } }
 
     subject! { get "/movies/#{movie.id}", headers: headers }
 
     context 'with existing id' do
-      it 'returns movie info' do
+      it 'returns movie info', :dox do
         expect(response).to have_http_status(:success)
       end
     end
   end
 
   describe 'PATCH /movies/:id' do
+    include Docs::Api::V1::Movies::Update
+
     let!(:movie) { create :movie, name: 'TEST', imdb_id: 'test' }
     let!(:headers) { { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' } }
     let!(:params) { { name: 'another name', price: 450 } }
@@ -45,7 +53,7 @@ RSpec.describe 'Movies', type: :request do
     subject! { patch "/movies/#{movie.id}", headers: headers, params: params.to_json }
 
     context 'with existing id and valid params' do
-      it 'updates existing movie params' do
+      it 'updates existing movie params', :dox do
         expect(response).to have_http_status(:success)
         movie.reload
         expect(movie.name).to eq(params[:name])
@@ -55,13 +63,15 @@ RSpec.describe 'Movies', type: :request do
   end
 
   describe 'DELETE /movies/:id' do
+    include Docs::Api::V1::Movies::Delete
+
     let!(:movie) { create :movie, name: 'TO DELETE', imdb_id: 'test' }
     let!(:headers) { { 'ACCEPT' => 'application/json' } }
 
     subject { delete "/movies/#{movie.id}", headers: headers }
 
     context 'with existing id' do
-      it 'deletes existing movie' do
+      it 'deletes existing movie', :dox do
         expect { subject }.to change { Movie.count }.by(-1)
         expect(response).to have_http_status(:success)
       end
@@ -69,6 +79,8 @@ RSpec.describe 'Movies', type: :request do
   end
 
   describe 'GET /movies' do
+    include Docs::Api::V1::Movies::Index
+
     let!(:movie) { create :movie, name: 'TEST', imdb_id: 'test' }
     let!(:movie2) { create :movie, name: 'TEST2', imdb_id: 'test2' }
     let!(:headers) { { 'ACCEPT' => 'application/json' } }
@@ -76,7 +88,7 @@ RSpec.describe 'Movies', type: :request do
     subject! { get '/movies', headers: headers }
 
     context 'when success' do
-      it 'returns movies list' do
+      it 'returns movies list', :dox do
         expect(response).to have_http_status(:success)
         expect(JSON.parse(response.body)['total']).to eq 2
       end
@@ -84,6 +96,8 @@ RSpec.describe 'Movies', type: :request do
   end
 
   describe 'POST /update_all_prices' do
+    include Docs::Api::V1::Movies::UpdateAllPrices
+
     let!(:movie) { create :movie, name: 'TEST', imdb_id: 'test', price: 111 }
     let!(:movie2) { create :movie, name: 'TEST2', imdb_id: 'test2', price: 222 }
     let!(:headers) { { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' } }
@@ -92,7 +106,7 @@ RSpec.describe 'Movies', type: :request do
     subject! { post '/update_all_prices', headers: headers, params: params.to_json }
 
     context 'when success' do
-      it 'updates all movies prices' do
+      it 'updates all movies prices', :dox do
         expect(response).to have_http_status(:success)
         movie.reload
         movie2.reload
@@ -102,33 +116,37 @@ RSpec.describe 'Movies', type: :request do
     end
   end
 
-  # describe 'GET /movies/:id/details' do
-  #   let!(:movie) { create :movie, name: 'The Fast and the Furious', imdb_id: 'tt0232500' }
-  #   let!(:headers) { { 'ACCEPT' => 'application/json' } }
+  describe 'GET /movies/:id/details' do
+    include Docs::Api::V1::Movies::GetMovieDetails
 
-  #   subject! { get "/movies/#{movie.id}/details", headers: headers }
+    let!(:movie) { create :movie, name: 'The Fast and the Furious', imdb_id: 'tt0232500' }
+    let!(:headers) { { 'ACCEPT' => 'application/json' } }
 
-  #   context 'with valid imdb_id' do
-  #     it 'returns movie details with info from OMDB' do
-  #       expect(response).to have_http_status(:success)
-  #       expect(JSON.parse(response.body)['movie_details']['Title']).to eq 'The Fast and the Furious'
-  #     end
-  #   end
-  # end
+    subject! { get "/movies/#{movie.id}/details", headers: headers }
 
-  # describe 'GET /all_movies' do
-  #   let!(:movie) { create :movie, name: 'The Fast and the Furious', imdb_id: 'tt0232500' }
-  #   let!(:movie2) { create :movie, name: 'some name', imdb_id: 'id' }
-  #   let!(:headers) { { 'ACCEPT' => 'application/json' } }
+    context 'with valid imdb_id' do
+      it 'returns movie details with info from OMDB', :dox do
+        expect(response).to have_http_status(:success)
+        expect(JSON.parse(response.body)['movie_details']['Title']).to eq 'The Fast and the Furious'
+      end
+    end
+  end
 
-  #   subject! { get "/all_movies", headers: headers }
+  describe 'GET /all_movies' do
+    include Docs::Api::V1::Movies::GetAllMoviesDetails
 
-  #   context 'when success' do
-  #     it 'returns all movies with info from OMDB' do
-  #       expect(response).to have_http_status(:success)
-  #       expect(JSON.parse(response.body)['total']).to eq 2
-  #       expect(JSON.parse(response.body)['movies'][0]['details']['Title']).to eq 'The Fast and the Furious'
-  #     end
-  #   end
-  # end
+    let!(:movie) { create :movie, name: 'The Fast and the Furious', imdb_id: 'tt0232500' }
+    let!(:movie2) { create :movie, name: 'some name', imdb_id: 'id' }
+    let!(:headers) { { 'ACCEPT' => 'application/json' } }
+
+    subject! { get '/all_movies', headers: headers }
+
+    context 'when success' do
+      it 'returns all movies with info from OMDB', :dox do
+        expect(response).to have_http_status(:success)
+        expect(JSON.parse(response.body)['total']).to eq 2
+        expect(JSON.parse(response.body)['movies'][0]['details']['Title']).to eq 'The Fast and the Furious'
+      end
+    end
+  end
 end

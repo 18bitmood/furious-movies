@@ -29,7 +29,7 @@ RSpec.describe 'Showtimes', type: :request do
     let!(:movie) { create :movie, name: 'TEST', imdb_id: 'test' }
     let!(:showtimefuture) { create :showtime, movie_id: movie.id, showtime: DateTime.now + 1.day }
     let!(:showtimepast) { create :showtime, movie_id: movie.id, showtime: DateTime.now - 1.day }
-    let(:params) {{ }}
+    let(:params) { {} }
     let(:headers) { { 'ACCEPT' => 'application/json' } }
 
     subject! { get "/movies/#{movie.id}/showtimes", params: params, headers: headers }
@@ -42,7 +42,7 @@ RSpec.describe 'Showtimes', type: :request do
     end
 
     context 'with including=all in params' do
-      let!(:params) {{ including: 'all' }}
+      let!(:params) { { including: 'all' } }
 
       it 'returns all showtimes' do
         expect(response).to have_http_status(:success)

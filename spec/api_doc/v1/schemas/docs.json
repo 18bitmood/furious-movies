@@ -1,0 +1,600 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Documentation",
+    "description": "",
+    "version": "1.0"
+  },
+  "paths": {
+    "/movies": {
+      "post": {
+        "summary": "Create a movie",
+        "tags": [
+          "Movies"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "example": "application/json"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/json"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "creates movie": {
+                  "summary": "creates movie",
+                  "value": {
+                    "name": "Movie",
+                    "imdb_id": "imdb"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "creates movie": {
+                    "summary": "creates movie",
+                    "value": {
+                      "success": true,
+                      "id": 217,
+                      "name": "Movie",
+                      "imdb_id": "imdb",
+                      "price": 0,
+                      "rating": {
+                        "average_rating": "0.0",
+                        "total_votes": null
+                      },
+                      "showtimes": [
+
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Show movies list with pagination",
+        "tags": [
+          "Movies"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "returns movies list": {
+                    "summary": "returns movies list",
+                    "value": {
+                      "total": 2,
+                      "movies": [
+                        {
+                          "id": 221,
+                          "name": "TEST",
+                          "imdb_id": "test",
+                          "price": 0,
+                          "rating": {
+                            "average_rating": "0.0",
+                            "total_votes": null
+                          },
+                          "showtimes": [
+
+                          ]
+                        },
+                        {
+                          "id": 222,
+                          "name": "TEST2",
+                          "imdb_id": "test2",
+                          "price": 0,
+                          "rating": {
+                            "average_rating": "0.0",
+                            "total_votes": null
+                          },
+                          "showtimes": [
+
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/{id}": {
+      "get": {
+        "summary": "Show existing movie",
+        "tags": [
+          "Movies"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "218"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "returns movie info": {
+                    "summary": "returns movie info",
+                    "value": {
+                      "id": 218,
+                      "name": "TEST",
+                      "imdb_id": "test",
+                      "price": 0,
+                      "rating": {
+                        "average_rating": "0.0",
+                        "total_votes": null
+                      },
+                      "showtimes": [
+
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update existing movie",
+        "tags": [
+          "Movies"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "219"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "example": "application/json"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/json"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "updates existing movie params": {
+                  "summary": "updates existing movie params",
+                  "value": {
+                    "name": "another name",
+                    "price": 450
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "updates existing movie params": {
+                    "summary": "updates existing movie params",
+                    "value": {
+                      "success": true,
+                      "id": 219,
+                      "name": "another name",
+                      "imdb_id": "test",
+                      "price": 450,
+                      "rating": {
+                        "average_rating": "0.0",
+                        "total_votes": null
+                      },
+                      "showtimes": [
+
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete existing movie",
+        "tags": [
+          "Movies"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "220"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "example": "application/json"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/x-www-form-urlencoded"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "deletes existing movie": {
+                    "summary": "deletes existing movie",
+                    "value": {
+                      "success": true
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/update_all_prices": {
+      "post": {
+        "summary": "Set price for all movies",
+        "tags": [
+          "Movies"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "example": "application/json"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/json"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "updates all movies prices": {
+                  "summary": "updates all movies prices",
+                  "value": {
+                    "price": 320
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "updates all movies prices": {
+                    "summary": "updates all movies prices",
+                    "value": {
+                      "success": true
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/{id}/details": {
+      "get": {
+        "summary": "Get movie detail with response from OMDB API",
+        "tags": [
+          "Movies"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "225"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "returns movie details with info from OMDB": {
+                    "summary": "returns movie details with info from OMDB",
+                    "value": {
+                      "id": 225,
+                      "name": "The Fast and the Furious",
+                      "imdb_id": "tt0232500",
+                      "price": 0,
+                      "rating": {
+                        "average_rating": "0.0",
+                        "total_votes": null
+                      },
+                      "showtimes": [
+
+                      ],
+                      "movie_details": {
+                        "Title": "The Fast and the Furious",
+                        "Year": "2001",
+                        "Rated": "PG-13",
+                        "Released": "22 Jun 2001",
+                        "Runtime": "106 min",
+                        "Genre": "Action, Crime, Thriller",
+                        "Director": "Rob Cohen",
+                        "Writer": "Ken Li (magazine article \"Racer X\"), Gary Scott Thompson (screen story), Gary Scott Thompson (screenplay), Erik Bergquist (screenplay), David Ayer (screenplay)",
+                        "Actors": "Paul Walker, Vin Diesel, Michelle Rodriguez, Jordana Brewster",
+                        "Plot": "Los Angeles police officer Brian O'Conner must decide where his loyalty really lies when he becomes enamored with the street racing world he has been sent undercover to destroy.",
+                        "Language": "English, Spanish",
+                        "Country": "USA, Germany",
+                        "Awards": "11 wins & 18 nominations.",
+                        "Poster": "https://m.media-amazon.com/images/M/MV5BNzlkNzVjMDMtOTdhZC00MGE1LTkxODctMzFmMjkwZmMxZjFhXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
+                        "Ratings": [
+                          {
+                            "Source": "Internet Movie Database",
+                            "Value": "6.8/10"
+                          },
+                          {
+                            "Source": "Rotten Tomatoes",
+                            "Value": "54%"
+                          },
+                          {
+                            "Source": "Metacritic",
+                            "Value": "58/100"
+                          }
+                        ],
+                        "Metascore": "58",
+                        "imdbRating": "6.8",
+                        "imdbVotes": "357,076",
+                        "imdbID": "tt0232500",
+                        "Type": "movie",
+                        "DVD": "10 Sep 2015",
+                        "BoxOffice": "$144,533,925",
+                        "Production": "Original Film, Neal H. Moritz Productions, Universal Pictures",
+                        "Website": "N/A",
+                        "Response": "True"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/all_movies": {
+      "get": {
+        "summary": "Get all movies detail with response from OMDB API",
+        "tags": [
+          "Movies"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "returns all movies with info from OMDB": {
+                    "summary": "returns all movies with info from OMDB",
+                    "value": {
+                      "total": 2,
+                      "movies": [
+                        {
+                          "id": 226,
+                          "name": "The Fast and the Furious",
+                          "imdb_id": "tt0232500",
+                          "price": 0,
+                          "rating": {
+                            "average_rating": "0.0",
+                            "total_votes": null
+                          },
+                          "showtimes": [
+
+                          ],
+                          "details": {
+                            "Title": "The Fast and the Furious",
+                            "Year": "2001",
+                            "Rated": "PG-13",
+                            "Released": "22 Jun 2001",
+                            "Runtime": "106 min",
+                            "Genre": "Action, Crime, Thriller",
+                            "Director": "Rob Cohen",
+                            "Writer": "Ken Li (magazine article \"Racer X\"), Gary Scott Thompson (screen story), Gary Scott Thompson (screenplay), Erik Bergquist (screenplay), David Ayer (screenplay)",
+                            "Actors": "Paul Walker, Vin Diesel, Michelle Rodriguez, Jordana Brewster",
+                            "Plot": "Los Angeles police officer Brian O'Conner must decide where his loyalty really lies when he becomes enamored with the street racing world he has been sent undercover to destroy.",
+                            "Language": "English, Spanish",
+                            "Country": "USA, Germany",
+                            "Awards": "11 wins & 18 nominations.",
+                            "Poster": "https://m.media-amazon.com/images/M/MV5BNzlkNzVjMDMtOTdhZC00MGE1LTkxODctMzFmMjkwZmMxZjFhXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
+                            "Ratings": [
+                              {
+                                "Source": "Internet Movie Database",
+                                "Value": "6.8/10"
+                              },
+                              {
+                                "Source": "Rotten Tomatoes",
+                                "Value": "54%"
+                              },
+                              {
+                                "Source": "Metacritic",
+                                "Value": "58/100"
+                              }
+                            ],
+                            "Metascore": "58",
+                            "imdbRating": "6.8",
+                            "imdbVotes": "357,076",
+                            "imdbID": "tt0232500",
+                            "Type": "movie",
+                            "DVD": "10 Sep 2015",
+                            "BoxOffice": "$144,533,925",
+                            "Production": "Original Film, Neal H. Moritz Productions, Universal Pictures",
+                            "Website": "N/A",
+                            "Response": "True"
+                          }
+                        },
+                        {
+                          "id": 227,
+                          "name": "some name",
+                          "imdb_id": "id",
+                          "price": 0,
+                          "rating": {
+                            "average_rating": "0.0",
+                            "total_votes": null
+                          },
+                          "showtimes": [
+
+                          ],
+                          "details": {
+                            "Response": "False",
+                            "Error": "Incorrect IMDb ID."
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Movies",
+      "description": ""
+    }
+  ],
+  "x-tagGroups": [
+    {
+      "name": "Movies",
+      "tags": [
+        "Movies"
+      ]
+    }
+  ]
+}
