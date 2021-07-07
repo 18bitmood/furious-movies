@@ -26,14 +26,14 @@ To setup an application:
 If you add seeds to your application ('rails db:setup'), it should be data in it.
 It provides all Fast and Furious series movies, and randomly adds showtimes, ratings, and prices for each of them.
 
-# You can find a documentation if you go to 'http://localhost:3000/api/docs/v2/docs.html' when the app is running
+## You can find a documentation if you go to 'http://localhost:3000/api/docs/v2/docs.html' when the app is running
 
 
 <i>Note that all lists are paginated with 10 per page, to get the second page of every list, add page=2 to request.</i>
 
 Here is the short instruction of usage.
 
-# /movies
+## /movies
 
 Every movie has its name, imdb_id, price, related ratings and showtimes.
 
@@ -53,7 +53,7 @@ Delete /movies/:id - destroy a movie.
 
 Post /update_all_prices - change the price for every movie to the value from params: price=.
 Note that you still can update a price to a movie personally by using patch /movies/:id.
-# movies/:id/ratings
+## movies/:id/ratings
 
 Ratings related to the movie.
 You can post as many ratings as you wish, it will add them and count the total number of ratings for the movie and an average rating. You can get this info from /movies/:id.
@@ -62,7 +62,7 @@ Post movies/:id/ratings - add a new rating to the movie
 
 Get movies/:id/ratings - get you the list of ratings
 
-# movies/:id/showtimes
+## movies/:id/showtimes
 
 Showtimes related to the movie.
 
@@ -75,5 +75,5 @@ Patch movies/:id/showtimes/:id - updates existing showtime
 Delete movies/:id/showtimes/:id - deletes an existing showitme
 
 Get movies/:id/showtimes - show you the list of showtimes relates to the movie.
-NOTE! SHOWS YOU ONLY FUTURE SHOWTIMES.
-TO SEE ALL SHOWTIMES FOR THE MOVIE, ADD 'including=all' PARAM tO YOUR REQUEST.
+
+### NOTE! SHOWS YOU ONLY FUTURE SHOWTIMES. TO SEE ALL SHOWTIMES FOR THE MOVIE, ADD 'including=all' PARAM tO YOUR REQUEST.
