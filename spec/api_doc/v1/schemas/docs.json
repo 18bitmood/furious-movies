@@ -50,7 +50,7 @@
                     "summary": "creates movie",
                     "value": {
                       "success": true,
-                      "id": 217,
+                      "id": 242,
                       "name": "Movie",
                       "imdb_id": "imdb",
                       "price": 0,
@@ -99,7 +99,7 @@
                       "total": 2,
                       "movies": [
                         {
-                          "id": 221,
+                          "id": 246,
                           "name": "TEST",
                           "imdb_id": "test",
                           "price": 0,
@@ -112,7 +112,7 @@
                           ]
                         },
                         {
-                          "id": 222,
+                          "id": 247,
                           "name": "TEST2",
                           "imdb_id": "test2",
                           "price": 0,
@@ -153,7 +153,7 @@
             "schema": {
               "type": "number"
             },
-            "example": "218"
+            "example": "243"
           },
           {
             "name": "Accept",
@@ -170,7 +170,7 @@
                   "returns movie info": {
                     "summary": "returns movie info",
                     "value": {
-                      "id": 218,
+                      "id": 243,
                       "name": "TEST",
                       "imdb_id": "test",
                       "price": 0,
@@ -207,7 +207,7 @@
             "schema": {
               "type": "number"
             },
-            "example": "219"
+            "example": "244"
           },
           {
             "name": "Accept",
@@ -245,7 +245,7 @@
                     "summary": "updates existing movie params",
                     "value": {
                       "success": true,
-                      "id": 219,
+                      "id": 244,
                       "name": "another name",
                       "imdb_id": "test",
                       "price": 450,
@@ -282,7 +282,7 @@
             "schema": {
               "type": "number"
             },
-            "example": "220"
+            "example": "245"
           },
           {
             "name": "Accept",
@@ -390,7 +390,7 @@
             "schema": {
               "type": "number"
             },
-            "example": "225"
+            "example": "250"
           },
           {
             "name": "Accept",
@@ -407,7 +407,7 @@
                   "returns movie details with info from OMDB": {
                     "summary": "returns movie details with info from OMDB",
                     "value": {
-                      "id": 225,
+                      "id": 250,
                       "name": "The Fast and the Furious",
                       "imdb_id": "tt0232500",
                       "price": 0,
@@ -498,7 +498,7 @@
                       "total": 2,
                       "movies": [
                         {
-                          "id": 226,
+                          "id": 251,
                           "name": "The Fast and the Furious",
                           "imdb_id": "tt0232500",
                           "price": 0,
@@ -551,7 +551,7 @@
                           }
                         },
                         {
-                          "id": 227,
+                          "id": 252,
                           "name": "some name",
                           "imdb_id": "id",
                           "price": 0,
@@ -581,11 +581,140 @@
           }
         }
       }
+    },
+    "/movies/{movie_id}/ratings": {
+      "post": {
+        "summary": "Create a rating for existing movie",
+        "tags": [
+          "Ratings"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "movie_id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "253"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "example": "application/json"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "example": "application/json"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "creates rating": {
+                  "summary": "creates rating",
+                  "value": {
+                    "mark": 4
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "creates rating": {
+                    "summary": "creates rating",
+                    "value": {
+                      "success": true,
+                      "id": 25,
+                      "mark": 4
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Show movies list with pagination",
+        "tags": [
+          "Ratings"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "movie_id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "example": "255"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; charset=utf-8": {
+                "examples": {
+                  "show movies ratings": {
+                    "summary": "show movies ratings",
+                    "value": {
+                      "total": 3,
+                      "ratings": [
+                        {
+                          "id": 26,
+                          "mark": 1
+                        },
+                        {
+                          "id": 27,
+                          "mark": 4
+                        },
+                        {
+                          "id": 28,
+                          "mark": 1
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "application/json; charset=utf-8"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "tags": [
     {
       "name": "Movies",
+      "description": ""
+    },
+    {
+      "name": "Ratings",
       "description": ""
     }
   ],
@@ -594,6 +723,12 @@
       "name": "Movies",
       "tags": [
         "Movies"
+      ]
+    },
+    {
+      "name": "Ratings",
+      "tags": [
+        "Ratings"
       ]
     }
   ]

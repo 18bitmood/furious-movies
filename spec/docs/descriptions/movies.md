@@ -1,1 +1,1 @@
-The docs for movies
+Docs for movies
