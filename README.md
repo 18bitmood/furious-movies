@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the app which maded as a test task. Complete description is here: 
+https://gist.github.com/swistaczek/0fa028af47eb83d19b5da3e6d3092e63
 
-Things you may want to cover:
+Shortly, this is an API which is using to manage movies in a small cinema,
+which is specialized only on Fast and Furious series.
 
-* Ruby version
+This app allows to add movies, set prices and showtimes, add ratings
+and setup a fetching details about every movie from OMDB API. 
 
-* System dependencies
+Please note that there is no any auth or setuping an abilities, it's a demo app.
 
-* Configuration
+## SETUP
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
