@@ -56,7 +56,7 @@ Note that you still can update a price to a movie personally by using patch /mov
 ## movies/:id/ratings
 
 Ratings related to the movie.
-You can post as many ratings as you wish, it will add them and count the total number of ratings for the movie and an average rating. You can get this info from /movies/:id.
+You can post as many ratings as you wish, it will add them and count the total number of ratings for the movie and an average rating. You can get this info from the endpoint /movies/:id.
 
 Post movies/:id/ratings - add a new rating to the movie
 
